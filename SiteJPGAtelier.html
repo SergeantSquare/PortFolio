@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://use.typekit.net/hbt1zem.css">
+  <link rel="stylesheet" href="https://use.typekit.net/hbt1zem.css">
+
+  <title>Portfolio — Atelier</title>
+
+  <style>
+  html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+@font-face {
+    font-family: "Renogare-Regular";
+    src:
+    local("Renogare-Regular");
+  }
+
+/* CONTENEUR PRINCIPAL */
+.scene-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* FOND */
+.fond {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* important ! */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+/* TON ÉLÉMENT CLIQUABLE */
+#travail1 {
+  position: absolute;
+  width: 4%;              /* taille PROPORTIONNELLE */
+  top: 25.5%;               /* position PROPORTIONNELLE */
+  left: 24.5%;
+  z-index: 2;
+  cursor: pointer;
+  transition: transform .5s;
+}
+
+#travail1:hover {
+  transform: scale(1.4);
+}
+
+/* DESCRIPTION */
+#mange {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+  display: none;
+}
+
+.button {
+  position: absolute;
+  width: 8%;
+  height: 8%;
+  top: 50%;
+  right : 1%;
+  padding: 15px 25px;
+  cursor: pointer;
+  border: none;
+  border-radius: 15px;
+  z-index: 2;
+  
+  background:url(./JPGPNG/Button.png) no-repeat center center;
+  background-size: contain;   /* makes image scale */
+
+}
+
+.button:hover {
+  background:url(./JPGPNG/ButtonHover.png) no-repeat center center;
+  background-size: contain;   /* makes image scale */
+}
+
+.button:active {
+    background:url(./JPGPNG/ButtonClicked.png) no-repeat center center;
+    background-size: contain;
+}
+
+.ff{
+  position: absolute;
+  top: 0px;
+}
+
+#Outils {  
+  position: absolute;
+  width: 40%;
+  top: 5%;
+  right: 5%;
+  z-index: 3;
+  
+  background-color: rgba(255, 255, 255, 0.75) ;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+#Outils> p {
+  padding-left: 10px;
+  padding-right: 10px;
+  font-family: "poppins", sans-serif;
+  font-weight: 200 ;
+  font-style: normal;
+  font-size: 14px;
+  margin-top: 0px;
+}
+
+#Outils> h3 {
+  text-align: center;
+  font-family: "poppins", sans-serif;
+  font-weight: 600 ;
+  font-style: normal;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+</style>
+</head>
+
+<body>
+<script type="text/javascript">
+  
+/*window.addEventListener("load", (event) => {
+  alert("La page est complètement chargée");
+});*/
+
+document.addEventListener("DOMContentLoaded", (event) => {
+    
+    var butO = document.getElementById("Outils");
+    console.log(butv[0]);
+    console.log(butv[1]);
+    var blur = document.getElementById("blur");
+    var opacityV = window.getComputedStyle(blur).opacity;
+    
+    var i = 0
+
+    for (let j = 0; j < butv.length; j++) {
+      butv[j].addEventListener("click", () => {
+        if (blur.style.opacity !== "1") {
+          blur.style.opacity = "1";
+          blur.style.top = "0";
+        } else {
+          blur.style.opacity = "0";
+          blur.style.top = "100%";
+        }
+      });
+    }
+
+    
+
+  });
+
+
+</script>
+
+
+
+  <div class="scene-container">
+    <nav class="blur-nav">
+      <button id="vitrine2" class="vitrine">Retour</button>
+    </nav>
+
+    <img class="fond" src="./JPGPNG/ScenePortFolioAtelierClearPetite.jpg" alt="Atelier Portfolio">
+
+    <button class="button" onclick="location.href='SiteJPGVitrine.html'"></button>
+  </div>
+
+  <div id="Outils">
+    <h3>Mes Outils</h3>
+    <p>
+      J’utilise quotidiennement les logiciels Adobe et d'autres logiciels complémentaires. Ils me permettent de travailler 
+      avec rigueur et finesse les idées brutes des clients afin de révéler toute leur valeur visuelle et créative.<br><br>
+
+      Grâce à ces outils, j’affine mes retouches photo avec minutie, je compose des illustrations avec 
+      exactitude et je mets en page mes créations avec un souci constant du détail.<br><br>
+
+      Leur complémentarité m’aide à obtenir des rendus soignés, cohérents et maîtrisés, tout en me donnant la liberté 
+      d’explorer des approches graphiques variées avec une grande précision.
+    </p>
+
+  </div> 
+</body>
+</html>
