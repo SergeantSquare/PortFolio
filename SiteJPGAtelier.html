@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html id="html" lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +9,20 @@
   <title>Portfolio — Atelier</title>
 
   <style>
+  html{
+    opacity: 0;
+    transition:  opacity 0.5s ease-in-out;
+  }
+
+  body {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+  }
+
+  body.fade-out {
+  opacity: 0;
+  }
+  
   html, body {
   margin: 0;
   padding: 0;
@@ -97,7 +111,7 @@
   top: 0px;
 }
 
-#Outils {  
+/*#Outils {  
   position: absolute;
   width: 40%;
   top: 5%;
@@ -108,40 +122,15 @@
   border-radius: 10px;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-}
+}*/
 
-#Outils> p {
-  padding-left: 10px;
-  padding-right: 10px;
-  font-family: "poppins", sans-serif;
-  font-weight: 200 ;
-  font-style: normal;
-  font-size: 14px;
-  margin-top: 0px;
-}
-
-#Outils> h3 {
-  text-align: center;
-  font-family: "poppins", sans-serif;
-  font-weight: 600 ;
-  font-style: normal;
-  font-size: 20px;
-  margin-bottom: 5px;
-}
-
-.blur-nav {
-  top: 0%;
-  padding: 15px;
-  z-index: 2; /* stay above content */
-  text-align: left;
-}
-
+/* Outils - Button */
 #Outils {
   font-family:"Renogare-Regular";
   position: relative;
-  z-index: 2;
+  z-index: 3;
   top: 2%;
-  left: 2%;
+  right: 2%;
   padding: 15px 25px;
   font-size: 20px;
   cursor: pointer;
@@ -152,7 +141,7 @@
   border: none;
   border-radius: 15px;
   box-shadow: 0 3px black;
-  transition: background-color 0.5s box-shadow 0.5s;
+  transition: background-color 0.5s;
 }
 
 #Outils:active {
@@ -164,68 +153,180 @@
   background-color: #5E331D;
   transition: background-color 0.5s , box-shadow 0.5s;
 }
+
+/* Outil - Paragraphe */
+#Outil {
+  display: block;
+  position: absolute;
+  left: 55%;
+  top: 7%;
+  width: 40%;
+  height: auto;
+  z-index: 2;
+  opacity: 50;
+  text-align: center;
+  background-color: rgb(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px); 
+  transition: opacity 1s ease-in-out , left 0.8s ease-in-out;
+  border-radius: 8px;
+
+}
+
+#Outil> p {
+  text-align: justify;
+  text-justify: inter-word;
+
+  padding-left: 10px;
+  padding-right: 10px;
+
+  font-family: "poppins", sans-serif;
+  font-weight: 200 ;
+  font-style: normal;
+  font-size: 16px;
+
+  margin-top: 0px;
+}
+
+#Outil> h3 {
+  text-align: center;
+  font-family: "poppins", sans-serif;
+  font-weight: 600 ;
+  font-style: normal;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+#Outil.open {
+  left: 100%;
+}
+
+.blur-nav {
+  top: 0%;
+  padding: 15px;
+  padding-top: 10px;
+  z-index: 2; /* stay above content */
+  text-align: right;
+}
+
+/*CSS RESET*/
+
+.vitrineR {
+  font-family:"Renogare-Regular";
+  position: relative;
+  z-index: 3;
+  top: 2%;
+  right: 1%;
+  padding: 15px 25px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #7d4e24;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 3px black;
+  transition: background-color 0.5s, box-shadow 0.5s;
+}
+
+.vitrineR:active {
+  box-shadow: 0 0px black;
+  transform: translateY(4px);
+}
+
+.vitrineR:hover {
+  background-color: #5E331D;
+  transition: background-color 0.5s , box-shadow 0.5s;
+}
+
+#resetKey img {
+  filter: grayscale(100%) brightness(0) invert(1); /* exemple : image blanche */
+}
+
 </style>
 </head>
 
 <body>
-<script type="text/javascript">
-  
-/*window.addEventListener("load", (event) => {
-  alert("La page est complètement chargée");
-});*/
-
-document.addEventListener("DOMContentLoaded", (event) => {
+  <script type="text/javascript">
     
-    var butO = document.getElementById("Outils");
-    console.log(butv[0]);
-    console.log(butv[1]);
-    var blur = document.getElementById("blur");
-    var opacityV = window.getComputedStyle(blur).opacity;
-    
-    var i = 0
+  /*window.addEventListener("load", (event) => {
+    alert("La page est complètement chargée");
+  });*/
 
-    for (let j = 0; j < butv.length; j++) {
-      butv[j].addEventListener("click", () => {
-        if (blur.style.opacity !== "1") {
-          blur.style.opacity = "1";
-          blur.style.top = "0";
-        } else {
-          blur.style.opacity = "0";
-          blur.style.top = "100%";
-        }
-      });
-    }
+  document.addEventListener("DOMContentLoaded", (event) => {
 
+  document.querySelectorAll(".button").forEach(button => {
+    button.addEventListener("click", () => {
+      const href = button.dataset.href;
+
+      document.body.classList.add("fade-out");
+
+      document.body.addEventListener(
+        "transitionend",
+        () => {
+          window.location.href = href;
+        },
+        { once: true }
+      );
+    });
+  });
     
+    var html = document.getElementById("html");
+    if (html.style.opacity == 0) {
+      html.style.opacity = "1";
+    } 
+
+    var butOU = document.getElementById("Outils");
+    var DescO = document.getElementById("Outil");
+    console.log(getComputedStyle(DescO).left);
+    console.log(butOU);
+    console.log(DescO);
+    
+    butOU.addEventListener("click", function () {
+      DescO.classList.toggle("open");
+    });
+
+  //RESET EXPERIENCE
+  const resetBtn = document.getElementById("resetKey");
+
+  resetBtn.addEventListener("click", () => {
+    sessionStorage.removeItem("hasKey");
+
+    const key = document.getElementById("key");
+    if (key) key.style.display = "block";
+
+
+    window.location.href = "SiteIndex.html"; 
+  });
 
   });
 
-
-</script>
+  </script>
 
 
 
   <div class="scene-container">
     <nav class="blur-nav">
-      <button id="Outils" class="Outils">Mes Outils</button>
+      <button id="Outils" style="display: none;" class="Outils">Outils</button>
+      <button id="resetKey" class="vitrineR">
+        <img src="JPGPNG\reset-svgrepo-com.svg" alt="Réinitialiser" style="width:30px; height:auto; vertical-align:middle;"> 
+      </button>
     </nav>
 
     <img class="fond" src="./JPGPNG/ScenePortFolioAtelierClearPetite.jpg" alt="Atelier Portfolio">
 
-    <button class="button" onclick="location.href='SiteJPGVitrine.html'"></button>
+  <button class="button" data-href="SiteJPGVitrine.html"></button>
   </div>
 
-  <div id="Outils">
+  <div id="Outil">
     <h3>Mes Outils</h3>
     <p>
-      J’utilise quotidiennement les logiciels Adobe et d'autres logiciels complémentaires. Ils me permettent de travailler 
-      avec rigueur et finesse les idées brutes des clients afin de révéler toute leur valeur visuelle et créative.<br><br>
+      J’utilise quotidiennement les logiciels Adobe et d'autres logiciels complémentaires.
+      Ils me permettent de travailler avec rigueur et finesse les idées brutes des clients afin de révéler toute leur valeur 
+      visuelle et créative.<br><br>
 
       Grâce à ces outils, j’affine mes retouches photo avec minutie, je compose des illustrations avec 
-      exactitude et je mets en page mes créations avec un souci constant du détail.<br><br>
-
-      Leur complémentarité m’aide à obtenir des rendus soignés, cohérents et maîtrisés, tout en me donnant la liberté 
-      d’explorer des approches graphiques variées avec une grande précision.
+      précision et je mets en page mes créations avec un souci constant du détail.<br><br>      
     </p>
 
   </div> 

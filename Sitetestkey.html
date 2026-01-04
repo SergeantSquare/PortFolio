@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://use.typekit.net/hbt1zem.css">
+  <link rel="stylesheet" href="https://use.typekit.net/hbt1zem.css">
+
+  <title>Portfolio — Vitrine</title>
+
+  <style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  #key {
+    cursor: pointer;
+    font-size: 2rem;
+    width: fit-content;
+  }
+
+  #doorMessage {
+    margin-top: 10px;
+    color: #c0392b;
+  }
+
+  </style>
+</head>
+
+<body>
+<script type="text/javascript">
+
+document.addEventListener("DOMContentLoaded", (event) => {
+
+  if (sessionStorage.getItem("hasKey") === "true") {
+    document.getElementById("key").style.display = "none";
+  }
+    const inspectDoorBtn = document.getElementById("inspectDoor");
+    const doorPanel = document.getElementById("doorPanel");
+    const openDoorBtn = document.getElementById("openDoor");
+    const doorMessage = document.getElementById("doorMessage");
+    const key = document.getElementById("key");
+
+    // Show door description
+    inspectDoorBtn.addEventListener("click", () => {
+      doorPanel.hidden = false;
+      doorMessage.textContent = "";
+    });
+
+    // Pick up key
+    key.addEventListener("click", () => {
+      sessionStorage.setItem("hasKey", "true");
+      key.style.display = "none";
+    });
+
+    // Open door
+    openDoorBtn.addEventListener("click", () => {
+      const hasKey = sessionStorage.getItem("hasKey");
+
+      if (hasKey === "true") {
+        doorMessage.style.color = "green";
+        doorMessage.textContent = "The door unlocks and opens...";
+        
+        // Example: redirect
+        // window.location.href = "room.html";
+      } else {
+        doorMessage.style.color = "#c0392b";
+        doorMessage.textContent = "I lost the key, help me find it.";
+      }
+    });
+
+});
+</script>
+
+  <button id="inspectDoor">Inspect door</button>
+
+  <div id="doorPanel" hidden>
+    <p id="doorDescription">
+      Behind this door is a quiet room filled with old memories.
+    </p>
+
+    <button id="openDoor">Open</button>
+    <p id="doorMessage"></p>
+  </div>
+
+<!-- Key -->
+<div id="key" title="Pick up key">🔑</div>
+
+  
+</body>
+</html>

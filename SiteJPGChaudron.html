@@ -1,0 +1,644 @@
+<!doctype html>
+<html id="html" lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://use.typekit.net/hbt1zem.css">
+  <link rel="stylesheet" href="https://use.typekit.net/hbt1zem.css">
+
+  <title>Portfolio — Porte</title>
+
+<style>
+
+
+html{
+  opacity: 0;
+  transition:  opacity 0.5s ease-in-out;
+}
+
+body {
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
+
+body.fade-out {
+  opacity: 0;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+@font-face {
+    font-family: "Renogare-Regular";
+    src:
+    local("Renogare-Regular");
+  }
+
+/* CONTENEUR PRINCIPAL */
+.scene-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* FOND */
+.fond {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* important ! */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+/* TON ÉLÉMENT CLIQUABLE */
+#travail1 {
+  position: absolute;
+  width: 4%;              /* taille PROPORTIONNELLE */
+  top: 25.5%;               /* position PROPORTIONNELLE */
+  left: 24.5%;
+  z-index: 2;
+  cursor: pointer;
+  transition: transform .5s;
+}
+
+#travail1:hover {
+  transform: scale(1.4);
+}
+
+/* DESCRIPTION */
+#mange {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+  display: none;
+}
+
+.navigate {
+  position: absolute;
+  width: 8%;
+  height: 8%;
+  top: 50%;
+  left : 1%;
+  padding: 15px 25px;
+  cursor: pointer;
+  border: none;
+  border-radius: 15px;
+  z-index: 2;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  background:url(./JPGPNG/Button.png) no-repeat center center;
+  background-size: contain;   /* makes image scale */
+
+}
+
+.navigate:hover {
+  background:url(./JPGPNG/ButtonHover.png) no-repeat center center;
+  background-size: contain;   /* makes image scale */
+}
+
+.navigate:active {
+    background:url(./JPGPNG/ButtonClicked.png) no-repeat center center;
+    background-size: contain;
+}
+
+
+.porte {
+  font-family:"Renogare-Regular";
+  position: relative;
+  z-index: 2;
+  top: 2%;
+  left: 2%;
+  padding: 15px 25px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #7d4e24;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 3px black;
+  transition: background-color 0.5s box-shadow 0.5s;
+}
+
+.porte:active {
+  box-shadow: 0 0px black;
+  transform: translateY(4px);
+}
+
+.porte:hover {
+  background-color: #5E331D;
+  transition: background-color 0.5s;
+}
+
+.vitrine {
+  font-family:"Renogare-Regular";
+  position: relative;
+  z-index: 2;
+  top: 2%;
+  left: 2%;
+  padding: 15px 25px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #7d4e24;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 3px black;
+  transition: background-color 0.5s, box-shadow 0.5s;
+}
+
+.vitrine:active {
+  box-shadow: 0 0px black;
+  transform: translateY(4px);
+}
+
+.vitrine:hover {
+  background-color: #5E331D;
+  transition: background-color 0.5s , box-shadow 0.5s;
+}
+
+#vitrine2 {
+  font-family:"Renogare-Regular";
+  position: relative;
+  z-index: 2;
+  top: 2%;
+  left: 2%;
+  padding: 15px 25px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #7d4e24;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 3px black;
+  transition: background-color 0.5s;
+}
+
+#vitrine2:active {
+  box-shadow: 0 0px black;
+  transform: translateY(4px);
+}
+
+#vitrine2:hover {
+  background-color: #5E331D;
+  transition: background-color 0.5s;
+}
+
+#blur {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  opacity: 0;
+  text-align: center;
+  background-color: rgb(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px); 
+  transition: opacity 1s ease-in-out , top 1s ease-in-out;
+  overflow-y: auto;  /* content scrolls */
+}
+
+#blur-content {
+  margin-top: 80px;    /* space so content doesn’t hide behind nav */
+  display: flex;
+  gap: 40px;
+  padding: 20px;
+  justify-content: center;
+  text-align: left ;
+  align-items: center;
+}
+
+.blur-nav {
+  position: sticky;       /* this is the magic */
+  top: 0;
+  padding: 15px;
+  z-index:2; /* stay above content */
+  text-align: left;
+}
+
+.text-block {
+  font-family: "poppins", sans-serif;
+  font-weight: 300  ;
+  font-style: normal;
+  width: 40%;
+  
+}
+
+.text-block > h2 , h3 {
+  font-family: "poppins", sans-serif;
+  font-weight: 600 ;
+  font-style: normal;
+}
+
+#ImageDemain{
+  position: relative;
+  vertical-align: middle;
+  
+  width: 30%;
+  height: 30%; 
+}
+
+#Outils {
+  width: 10%;
+}
+
+#Outils:not(:first-of-type) {
+  margin-left: 25px;
+}
+
+.testt{
+  position: relative;
+  vertical-align: middle;
+  width: 35%;
+  top: 0;
+}
+
+#key {
+  cursor: pointer;
+  font-size: 2rem;
+  width: fit-content;
+}
+
+#doorPanel {
+  font-family: "poppins", sans-serif;
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40%;
+  height: auto;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+
+  
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+
+  transition: opacity 1s ease-in-out, left 0.8s ease-in-out;
+}
+
+#openDoor{
+  font-family: "poppins", sans-serif;
+  background-color:burlywood;
+  border: none;
+}
+
+.selection-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+/* Grille d’images */
+.images-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: auto auto;
+  gap: 20px;
+  padding: 20px;
+  position: relative;
+  position: absolute;
+  z-index: 1;
+}
+
+/* Images cliquables */
+.selectable-image {
+  width: 100%;
+  cursor: pointer;
+  border: 4px solid transparent;
+  transition: border 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover (optionnel) */
+.selectable-image:hover {
+  transform: scale(1.03);
+}
+
+/* Image sélectionnée */
+.image-item.selected img {
+  outline: 3px solid #7d4e24;
+}
+
+/* Bouton */
+#projectButton {
+  position: absolute;
+  bottom: 38%;
+  right: 1.3%;
+
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+#projectButton.show {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+.image-item {
+  position: relative; /* référence pour le span */
+  cursor: pointer;
+
+}
+
+.selectable-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* toute l'image visible */
+  display: block;
+  background: radial-gradient(circle at 50% 50%, rgba(143, 86, 18, 0.34) 0%, rgba(255, 255, 255, 0) 100%); /* optionnel, pour les espaces vides */
+  border-radius: 10px;
+}
+
+/* Crédit */
+.credit {
+  position: absolute;
+  bottom: -5px;          /* collé en bas */
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: inline-block;
+  width: fit-content;
+
+  font-size: 12px;
+  color: white;
+  background: rgba(0, 0, 0, 0.65);
+  padding: 6px 10px;
+
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+/* Apparition au hover */
+.image-item:hover .credit {
+  opacity: 1;
+}
+
+/*RESET BUTTON*/
+
+.vitrineR {
+  font-family:"Renogare-Regular";
+  position: absolute;
+  z-index: 2;
+  bottom: 2%;
+  right: 1%;
+  padding: 15px 25px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #7d4e24;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 3px black;
+  transition: background-color 0.5s, box-shadow 0.5s;
+}
+
+.vitrineR:active {
+  box-shadow: 0 0px black;
+  transform: translateY(4px);
+}
+
+.vitrineR:hover {
+  background-color: #5E331D;
+  transition: background-color 0.5s , box-shadow 0.5s;
+}
+
+#resetKey img {
+  filter: grayscale(100%) brightness(0) invert(1); /* exemple : image blanche */
+}
+
+
+/*BOUTON Où SUIS-JE*/
+#Inspi {
+  z-index: 3;
+  bottom: 38%;
+  left: 1.3%;
+}
+
+.Inspi {
+  font-family:"Renogare-Regular";
+  position: absolute;
+  padding: 15px 25px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #7d4e24;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 3px black;
+  transition: background-color 0.5s;
+}
+
+.Inspi:active {
+  box-shadow: 0 0px black;
+  transform: translateY(4px);
+}
+
+.Inspi:hover {
+  background-color: #5E331D;
+  transition: background-color 0.5s , box-shadow 0.5s;
+}
+
+#Expli {
+  display: block;
+  position: absolute;
+  left: -50%;
+  bottom: 4%;
+  width: 40%;
+  height: auto;
+  z-index: 2;
+  opacity: 50;
+  text-align: center;
+  background-color: rgb(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px); 
+  transition: opacity 1s ease-in-out , left 0.8s ease-in-out;
+  border-radius: 8px;
+
+}
+
+#Expli> p {
+  text-align: justify;
+  text-justify: inter-word;
+
+  padding-left: 10px;
+  padding-right: 10px;
+
+  font-family: "poppins", sans-serif;
+  font-weight: 200 ;
+  font-style: normal;
+  font-size: 14px;
+}
+
+#Expli.open {
+  left: 1%;
+}
+
+.round {
+  border-radius:50px ;
+}
+
+  </style>
+</head>
+
+<body>
+
+<script type="text/javascript">
+  
+document.addEventListener("DOMContentLoaded", (event) => {
+
+  document.querySelectorAll(".button").forEach(button => {
+    button.addEventListener("click", () => {
+      const href = button.dataset.href;
+
+      document.body.classList.add("fade-out");
+
+      document.body.addEventListener(
+        "transitionend",
+        () => {
+          window.location.href = href;
+        },
+        { once: true }
+      );
+    });
+  });
+
+  var html = document.getElementById("html");
+  if (html.style.opacity == 0) {
+    html.style.opacity = "1";
+  } 
+
+  const imageItems = document.querySelectorAll(".image-item");
+  const projectButton = document.getElementById("projectButton");
+
+  imageItems.forEach(item => {
+    item.addEventListener("click", () => {
+      item.classList.toggle("selected");
+      updateButtonVisibility();
+    });
+  });
+
+  function updateButtonVisibility() {
+    const selectedItems = document.querySelectorAll(".image-item.selected");
+
+    if (selectedItems.length > 0) {
+      projectButton.classList.add("show");
+    } else {
+      projectButton.classList.remove("show");
+    }
+  }
+
+  projectButton.addEventListener("click", () => {
+    window.location.href = "SiteJPGBague.html";
+  });
+
+  const resetBtn = document.getElementById("resetKey");
+
+    resetBtn.addEventListener("click", () => {
+      sessionStorage.removeItem("hasKey");
+
+      const key = document.getElementById("key");
+      if (key) key.style.display = "block";
+    
+    window.location.href = "SiteIndex.html"; 
+  });
+
+  var butOU = document.getElementsByClassName("Inspi")[1];
+  var DescO = document.getElementById("Expli");
+  console.log(getComputedStyle(DescO).left);
+  console.log(butOU);
+  console.log(DescO);
+  
+  butOU.addEventListener("click", function () {
+    DescO.classList.toggle("open");
+  });
+
+  
+
+});
+
+</script>
+
+<div id="fond" class="scene-container">
+
+  <img class="fond" src="./JPGPNG/Chaudron.png">
+
+  <div class="images-grid">
+
+    <div class="image-item" data-credit="© oathbreak3r – Cyberpunk 2077">
+      <img src="JPGPNG\Cyberpunk Wallpaper.jpg" class="selectable-image" alt="">
+      <span class="credit">© oathbreak3r – Cyberpunk 2077</span>
+    </div>
+
+    <div class="image-item" data-credit="© Karim Amr – Inside the History">
+      <img src="JPGPNG\KarimAmr.png" class="selectable-image" alt="">
+      <span class="credit">© Karim Amr – Inside the History</span>
+    </div>
+
+    <div class="image-item" data-credit="© Sophia Ahamed">
+      <img src="JPGPNG\Sophia Ahamed.jpg" class="selectable-image" alt="">
+      <span class="credit">© Sophia Ahamed</span>
+    </div>
+
+    <div class="image-item" data-credit="© Claude Monet - La Promenade">
+      <img src="JPGPNG\La Promenade Claude Monet.png" class="selectable-image" alt="">
+      <span class="credit">© Claude Monet - La Promenade</span>
+    </div>
+
+    <div class="image-item" data-credit="© Shane Acker – Numéro 9">
+      <img src="JPGPNG\Numéro 9.jpg" class="selectable-image" alt="">
+      <span class="credit">© Shane Acker – Numéro 9</span>
+    </div>
+
+    <div class="image-item" data-credit="© A.M.Cassandre – Le Normandie">
+      <img src="JPGPNG\Le Normandie A_M_CASSANDRE 1935.png" class="selectable-image" alt="">
+      <span class="credit">© A.M.Cassandre – Le Normandie</span>
+    </div>
+  
+  </div>
+  <button id="projectButton" class="Inspi button" data-href="SiteJPGBague.html">Me contacter</button>
+  <button id="Inspi" class="Inspi">Où suis-je ?</button>
+  
+  <div id="Expli">
+    <p>
+      C'est ici que se déroule mon étape de réflexion, que ce soit en amont ou pendant un projet. 
+      Pour effectuer cette étape, je prends en compte 4 choses importantes : le cahier des charges du projet, 
+      les projets similaires existants, mes inspirations et mes expériences.<br>
+
+      Cependant, j'ai besoin de vous ! Je n'ai actuellement pas de projet sur lequel travailler. J'aimerai beaucoup faire partie de votre équipe,
+      être un maillon à votre chaîne.<br>
+
+      Sélectionnez avec justesse une ou plusieurs inspirations qui vous intéressent, un bouton devrait apparaître.
+      Si vous êtes intéressé par mon profil, n'hésitez pas à me partager votre projet.
+    </p>
+
+  </div> 
+  <button id="resetKey" class="vitrineR">
+    <img src="JPGPNG\reset-svgrepo-com.svg" alt="Réinitialiser" style="width:30px; height:auto; vertical-align:middle;"> 
+  </button>
+</div>
+
+</body>
+</html>

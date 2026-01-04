@@ -1,0 +1,444 @@
+<!doctype html>
+<html id="html" lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://use.typekit.net/hbt1zem.css">
+  <link rel="stylesheet" href="https://use.typekit.net/hbt1zem.css">
+
+  <title>Portfolio — Porte</title>
+
+  <style>
+    html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+html{
+  opacity: 0;
+  transition:  opacity 0.5s ease-in-out;
+}
+
+@font-face {
+    font-family: "Renogare-Regular";
+    src:
+    local("Renogare-Regular");
+  }
+
+/* CONTENEUR PRINCIPAL */
+.scene-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* FOND */
+.fond {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* important ! */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+/* TON ÉLÉMENT CLIQUABLE */
+#travail1 {
+  position: absolute;
+  width: 4%;              /* taille PROPORTIONNELLE */
+  top: 25.5%;               /* position PROPORTIONNELLE */
+  left: 24.5%;
+  z-index: 2;
+  cursor: pointer;
+  transition: transform .5s;
+}
+
+#travail1:hover {
+  transform: scale(1.4);
+}
+
+/* DESCRIPTION */
+#mange {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+  display: none;
+}
+
+.navigate {
+  position: absolute;
+  width: 8%;
+  height: 8%;
+  top: 50%;
+  left : 1%;
+  padding: 15px 25px;
+  cursor: pointer;
+  border: none;
+  border-radius: 15px;
+  z-index: 2;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  background:url(./JPGPNG/Button.png) no-repeat center center;
+  background-size: contain;   /* makes image scale */
+
+}
+
+.navigate:hover {
+  background:url(./JPGPNG/ButtonHover.png) no-repeat center center;
+  background-size: contain;   /* makes image scale */
+}
+
+.navigate:active {
+    background:url(./JPGPNG/ButtonClicked.png) no-repeat center center;
+    background-size: contain;
+}
+
+
+.porte {
+  font-family:"Renogare-Regular";
+  position: relative;
+  z-index: 2;
+  top: 2%;
+  left: 2%;
+  padding: 15px 25px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #7d4e24;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 3px black;
+  transition: background-color 0.5s box-shadow 0.5s;
+}
+
+.porte:active {
+  box-shadow: 0 0px black;
+  transform: translateY(4px);
+}
+
+.porte:hover {
+  background-color: #5E331D;
+  transition: background-color 0.5s;
+}
+
+.vitrine {
+  font-family:"Renogare-Regular";
+  position: relative;
+  z-index: 2;
+  top: 2%;
+  left: 2%;
+  padding: 15px 25px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #7d4e24;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 3px black;
+  transition: background-color 0.5s, box-shadow 0.5s;
+}
+
+.vitrine:active {
+  box-shadow: 0 0px black;
+  transform: translateY(4px);
+}
+
+.vitrine:hover {
+  background-color: #5E331D;
+  transition: background-color 0.5s , box-shadow 0.5s;
+}
+
+#vitrine2 {
+  font-family:"Renogare-Regular";
+  position: relative;
+  z-index: 2;
+  top: 2%;
+  left: 2%;
+  padding: 15px 25px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #7d4e24;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 3px black;
+  transition: background-color 0.5s;
+}
+
+#vitrine2:active {
+  box-shadow: 0 0px black;
+  transform: translateY(4px);
+}
+
+#vitrine2:hover {
+  background-color: #5E331D;
+  transition: background-color 0.5s;
+}
+
+#blur {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  opacity: 0;
+  text-align: center;
+  background-color: rgb(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px); 
+  transition: opacity 1s ease-in-out , top 1s ease-in-out;
+  overflow-y: auto;  /* content scrolls */
+}
+
+#blur-content {
+  margin-top: 80px;    /* space so content doesn’t hide behind nav */
+  display: flex;
+  gap: 40px;
+  padding: 20px;
+  justify-content: center;
+  text-align: left ;
+  align-items: center;
+}
+
+.blur-nav {
+  position: sticky;       /* this is the magic */
+  top: 0;
+  padding: 15px;
+  z-index:2; /* stay above content */
+  text-align: left;
+}
+
+.text-block {
+  font-family: "poppins", sans-serif;
+  font-weight: 300  ;
+  font-style: normal;
+  width: 40%;
+  
+}
+
+.text-block > h2 , h3 {
+  font-family: "poppins", sans-serif;
+  font-weight: 600 ;
+  font-style: normal;
+}
+
+#ImageDemain{
+  position: relative;
+  vertical-align: middle;
+  
+  width: 30%;
+  height: 30%; 
+}
+
+#Outils {
+  width: 10%;
+}
+
+#Outils:not(:first-of-type) {
+  margin-left: 25px;
+}
+
+.testt{
+  position: relative;
+  vertical-align: middle;
+  width: 35%;
+  top: 0;
+}
+
+#key {
+  cursor: pointer;
+  font-size: 2rem;
+  width: fit-content;
+}
+
+#doorPanel {
+  font-family: "poppins", sans-serif;
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40%;
+  height: auto;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+
+  
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+
+  transition: opacity 1s ease-in-out, left 0.8s ease-in-out;
+}
+
+#openDoor{
+  font-family: "poppins", sans-serif;
+  background-color:burlywood;
+  border: none;
+}
+
+/*RESET BUTTON*/
+.vitrineR {
+  font-family:"Renogare-Regular";
+  position: absolute;
+  z-index: 2;
+  top: 1%;
+  right : 2%;
+  padding: 15px 25px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #7d4e24;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 3px black;
+  transition: background-color 0.5s, box-shadow 0.5s;
+
+}
+
+.vitrineR:active {
+  box-shadow: 0 0px black;
+  transform: translateY(4px);
+}
+
+.vitrineR:hover {
+  background-color: #5E331D;
+  transition: background-color 0.5s , box-shadow 0.5s;
+}
+
+#imageCentrale {
+  position: absolute;
+  width: 15%;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  transition: transform 0.2s ease-in-out;
+}
+
+#imageCentrale:hover {
+  cursor: pointer;
+  transform: translate(-50%, -50%) scale(1.05); 
+}
+
+#leftI {
+  position:absolute;
+  width: 10%;
+  left: 25%;
+  top: 50%;
+  z-index: 2;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1.05); 
+  transition: transform 0.2s ease-in-out;
+}
+
+#leftI:hover {
+  cursor: pointer;
+  transform: translate(-50%, -50%) scale(1.05); 
+  
+}
+
+#rightI {
+  position:absolute;
+  width: 10%;
+  left: 75%;
+  top: 50%;
+  z-index: 2;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1.05);
+  transition: transform 0.2s ease-in-out;
+}
+
+#rightI:hover {
+  cursor: pointer;
+  transform: translate(-50%, -50%) scale(1.05); 
+}
+
+#leftI, #rightI {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+#resetKey img {
+  filter: grayscale(100%) brightness(0) invert(1); /* exemple : image blanche */
+}
+
+
+  </style>
+</head>
+
+<body>
+
+<script type="text/javascript">
+  
+document.addEventListener("DOMContentLoaded", (event) => {
+
+ var html = document.getElementById("html");
+  if (html.style.opacity == 0) {
+    html.style.opacity = "1";
+  } 
+
+  const imageCentrale = document.getElementById("imageCentrale");
+  const leftImage = document.getElementById("leftI");
+  const rightImage = document.getElementById("rightI");
+
+  imageCentrale.addEventListener("click", () => {
+    // Vérifie l'opacité actuelle
+    let OLImage = parseFloat(getComputedStyle(leftImage).opacity);
+    let ORImage = parseFloat(getComputedStyle(rightImage).opacity);
+
+    if (OLImage === 0 && ORImage === 0) {
+      // Modifie l'opacité réelle des éléments
+      leftImage.style.opacity = "1";
+      rightImage.style.opacity = "1";
+    }
+  });
+    
+
+  const resetBtn = document.getElementById("resetKey");
+
+  resetBtn.addEventListener("click", () => {
+    sessionStorage.removeItem("hasKey");
+
+    const key = document.getElementById("key");
+    if (key) key.style.display = "block";
+  
+  window.location.href = "SiteIndex.html"; 
+});
+
+
+
+});
+
+</script>
+
+  <div id="fond" class="scene-container">
+
+      <button id="resetKey" class="vitrineR">
+        <img src="JPGPNG\reset-svgrepo-com.svg" alt="Réinitialiser" style="width:30px; height:auto; vertical-align:middle;"> 
+      </button>
+
+    <img class="fond" src="./JPGPNG/SceneRing.jpg">
+
+    <img id="imageCentrale" src="JPGPNG\Ring.png" alt="Image cliquable">
+    <a href="https://www.linkedin.com/in/tom-gautier-87167b2ba" target="_blank"> <img id="leftI" src="JPGPNG\linkedinlogo.png" alt="Linkedin"> </a>
+    <a href="mailto:tgautier0908@gmail.com"> <img id="rightI" src="JPGPNG\mailogo.png" alt="Mail"> </a>
+
+    
+  </div>
+  
+</body>
+</html>

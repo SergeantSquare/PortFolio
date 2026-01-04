@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html id="html" lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,25 @@
   <title>Portfolio — Vitrine</title>
 
   <style>
-    html, body {
+html{
+  opacity: 0;
+  transition:  opacity 0.5s ease-in-out;
+}
+
+body {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+body.fade-out {
+  opacity: 0;
+}
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+html, body {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -65,7 +83,7 @@
   display: none;
 }
 
-.navigate {
+.button {
   position: absolute;
   width: 8%;
   height: 8%;
@@ -83,12 +101,12 @@
 
 }
 
-.navigate:hover {
+.button:hover {
   background:url(./JPGPNG/ButtonHover.png) no-repeat center center;
   background-size: contain;   /* makes image scale */
 }
 
-.navigate:active {
+.button:active {
     background:url(./JPGPNG/ButtonClicked.png) no-repeat center center;
     background-size: contain;
 }
@@ -99,7 +117,7 @@
   position: relative;
   z-index: 2;
   top: 2%;
-  left: 2%;
+  left: 62%;
   padding: 15px 25px;
   font-size: 20px;
   cursor: pointer;
@@ -128,7 +146,7 @@
   position: relative;
   z-index: 2;
   top: 2%;
-  left: 2%;
+  left: 22.5%;
   padding: 15px 25px;
   font-size: 20px;
   cursor: pointer;
@@ -139,7 +157,7 @@
   border: none;
   border-radius: 15px;
   box-shadow: 0 3px black;
-  transition: background-color 0.5s box-shadow 0.5s;
+  transition: background-color 0.5s, box-shadow 0.5s;
 }
 
 .vitrine:active {
@@ -168,7 +186,7 @@
   border: none;
   border-radius: 15px;
   box-shadow: 0 3px black;
-  transition: background-color 0.5s box-shadow 0.5s;
+  transition: background-color 0.5s;
 }
 
 #vitrine2:active {
@@ -178,7 +196,7 @@
 
 #vitrine2:hover {
   background-color: #5E331D;
-  transition: background-color 0.5s , box-shadow 0.5s;
+  transition: background-color 0.5s;
 }
 
 #blur {
@@ -204,12 +222,14 @@
   padding: 20px;
   justify-content: center;
   text-align: left ;
+  align-items: center;
 }
 
 .blur-nav {
   position: sticky;       /* this is the magic */
   top: 0;
   padding: 15px;
+  padding-top: 10px;
   z-index:2; /* stay above content */
   text-align: left;
 }
@@ -219,6 +239,7 @@
   font-weight: 300  ;
   font-style: normal;
   width: 40%;
+  
 }
 
 .text-block > h2 , h3 {
@@ -227,12 +248,23 @@
   font-style: normal;
 }
 
-#ImageDemain{
+.ImageDemain{
   position: relative;
   vertical-align: middle;
   
   width: 30%;
-  height: 30%; 
+  height: auto; 
+}
+
+.ImageDemain.first-image {
+  filter: grayscale(0%);
+  transform: scale(1);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.ImageDemain.first-image:hover {
+  filter: grayscale(50%);
+  transform: scale(1.05);
 }
 
 #Outils {
@@ -250,66 +282,323 @@
   top: 0;
 }
 
+#key {
+  cursor: pointer;
+  font-size: 2rem;
+  width: fit-content;
+}
+
+#doorPanel {
+  opacity: 0;
+  font-family: "poppins", sans-serif;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30%;
+  height: auto;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+  border-radius: 20px;
+  padding: 20px; 
+  
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  transition: opacity 0.8s ease-in-out, left 0.8s ease-in-out;
+}
+
+#openDoor{
+  font-family: "poppins", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  background-color:burlywood;
+  border: none;
+  cursor: pointer;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-decoration: none;
+  color: black;
+}
+
+/*CSS Video + Bouton Video*/
+
+#thumbnail {
+  cursor: pointer;
+}
+
+/* Overlay caché par défaut */
+#videoOverlay {
+  position: fixed;
+  inset: 0; /* top right bottom left = 0 */
+  background: rgba(0, 0, 0, 0.7);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease;
+  z-index: 1000;
+}
+
+/* Overlay visible */
+#videoOverlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+#videoOverlay video {
+  max-width: 80%;
+  max-height: 80%;
+}
+
+/* Bouton fermer */
+#closeVideo {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  background: none;
+  border: none;
+  color: white;
+  font-size: 32px;
+  cursor: pointer;
+}
+
+/*CSS RESET*/
+.vitrineR {
+  font-family:"Renogare-Regular";
+  position: relative;
+  z-index: 2;
+  top: 2%;
+  left: 78%;
+  padding: 15px 25px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #7d4e24;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 3px black;
+  transition: background-color 0.5s, box-shadow 0.5s;
+}
+
+.vitrineR:active {
+  box-shadow: 0 0px black;
+  transform: translateY(4px);
+}
+
+.vitrineR:hover {
+  background-color: #5E331D;
+  transition: background-color 0.5s , box-shadow 0.5s;
+}
+
+#resetKey img {
+  filter: grayscale(100%) brightness(0) invert(1); /* exemple : image blanche */
+}
+
   </style>
 </head>
 
 <body>
 
-  <script type="text/javascript">
+<script type="text/javascript">
   
-  document.addEventListener("DOMContentLoaded", (event) => {
-    
-    var butv = document.getElementsByClassName("vitrine");
-    console.log(butv[0]);
-    console.log(butv[1]);
-    var blur = document.getElementById("blur");
-    var opacityV = window.getComputedStyle(blur).opacity;
-    
-    var i = 0
+document.addEventListener("DOMContentLoaded", (event) => {
 
-    for (let j = 0; j < butv.length; j++) {
-      butv[j].addEventListener("click", () => {
-        if (blur.style.opacity !== "1") {
-          blur.style.opacity = "1";
-          blur.style.top = "0";
-        } else {
-          blur.style.opacity = "0";
-          blur.style.top = "100%";
-        }
-      });
-    }
+  document.querySelectorAll(".button").forEach(button => {
+  button.addEventListener("click", () => {
 
-    
+    const href = button.dataset.href;
 
+    document.body.classList.add("fade-out");
+
+    document.body.addEventListener(
+      "transitionend",
+      () => {
+        window.location.href = href;
+      },
+      { once: true }
+    );
   });
 
-  </script>
+  document.querySelectorAll(".buttonENTER").forEach(buttonENTER => {
+  buttonENTER.addEventListener("click", () => {
+    const href = button.dataset.href;
+    document.body.classList.add("fade-out");
+
+    document.body.addEventListener(
+      "transitionend",
+      () => {
+        window.location.href = href;
+      },
+      { once: true }
+    );
+  });
+});
+
+});
+
+  var html = document.getElementById("html");
+  if (html.style.opacity == 0) {
+    html.style.opacity = "1";
+  } 
+    
+  var butv = document.getElementsByClassName("vitrine");
+  console.log(butv[0]);
+  console.log(butv[1]);
+  var blur = document.getElementById("blur");
+  var opacityV = window.getComputedStyle(blur).opacity;
+
+  for (let j = 0; j < butv.length; j++) {
+    butv[j].addEventListener("click", () => {
+      if (blur.style.opacity !== "1") {
+        blur.style.opacity = "1";
+        blur.style.top = "0";
+      } else {
+        blur.style.opacity = "0";
+        blur.style.top = "100%";
+      }
+    });
+  }
+
+  /* Code Porte + Clé*/
+
+  if (sessionStorage.getItem("hasKey") === "true") {
+    document.getElementById("key").style.display = "none";
+  }
+
+  const inspectDoorBtn = document.getElementById("porte");
+  const doorPanel = document.getElementById("doorPanel");
+  const openDoorBtn = document.getElementById("openDoor");
+  const doorMessage = document.getElementById("doorMessage");
+  const key = document.getElementById("key");
+
+  // Show door description
+  inspectDoorBtn.addEventListener("click", () => {
+    
+    if (doorPanel.style.opacity == 0) {
+      doorPanel.style.opacity = 1;
+      
+    } else {
+      doorPanel.style.opacity = 0;
+    }
+  
+  });
+
+  // Pick up key
+  key.addEventListener("click", () => {
+    sessionStorage.setItem("hasKey", "true");
+    key.style.display = "none";
+  });
+  
+  if (sessionStorage.getItem("hasKey") === "true") {
+    document.getElementById("key").style.display = "none";
+  }
+
+openDoorBtn.addEventListener("click", (e) => {
+  e.preventDefault(); // <-- empêche le navigateur de suivre le href immédiatement
+
+  const hasKey = sessionStorage.getItem("hasKey");
+
+  if (hasKey === "true") {
+    // Message vert et ouverture de la porte
+    doorMessage.style.color = "green";
+    doorMessage.textContent = "";
+
+    // Redirection vers la pièce suivante
+    setTimeout(() => {
+      window.location.href = "SiteJPGChaudron.html";
+    }, 500); // laisse le message 0.5s
+  } else {
+    // Message rouge, tu n’as pas la clé
+    doorMessage.style.color = "#c0392b";
+    doorMessage.textContent = "Je n'ai pas la clé, aidez-moi à la trouver !";
+  }
+});
+
+//RESET EXPERIENCE
+const resetBtn = document.getElementById("resetKey");
+
+resetBtn.addEventListener("click", () => {
+  sessionStorage.removeItem("hasKey");
+
+  const key = document.getElementById("key");
+  if (key) key.style.display = "block";
+
+
+  window.location.href = "SiteIndex.html"; 
+});
+
+// Code Video + Bouton Video
+const openVideo = document.querySelector(".ImageDemain");
+const overlay = document.getElementById("videoOverlay");
+const closeVideo = document.getElementById("closeVideo");
+const video = overlay.querySelector("video");
+
+openVideo.addEventListener("click", () => {
+  overlay.classList.add("show");
+  document.body.classList.add("no-scroll");
+  video.play();
+});
+
+closeVideo.addEventListener("click", () => {
+  overlay.classList.remove("show");
+  document.body.classList.remove("no-scroll");
+  video.pause();
+  video.currentTime = 0;
+});
+
+});
+
+</script>
 
   <div id="fond" class="scene-container">
     <nav class="blur-nav">
       <button id="vitrine" class="vitrine">Vitrine</button>
       <button id="porte" class="porte">Porte</button>
+      <button id="resetKey" class="vitrineR">
+        <img src="JPGPNG\reset-svgrepo-com.svg" alt="Réinitialiser" style="width:30px; height:auto; vertical-align:middle;"> 
+      </button>
     </nav>
   
   <img class="fond" src="./JPGPNG/ScènePortFolioVitrine.jpg">
 
     <!--<img id="travail1" src="./JPGPNG/IMAGINONS_DEMAIN-AFFICHE-2.1.jpg" alt="Travail 1">-->
 
-    <button class="navigate" onclick="location.href='SiteJPGAtelier.html'"></button>
-
+    <button class="button" data-href="SiteJPGAtelier.html"></button>
     
+
+    <div id="doorPanel">
+      <p id="doorDescription">
+        Cette porte est fermée.<br>
+        (Vous ne pourrez plus revenir en arrière après être entré dans la pièce suivante.)
+      </p>
+
+      <a id="openDoor" class="buttonENTER" data-href="SiteJPGChaudron.html">Ouvrir la porte et entrer</a>
+      <p id="doorMessage"></p>
+    </div>
     
   </div>
-  
+  <div id="videoOverlay">
+      <button id="closeVideo">✕</button>
+        <video controls>
+          <source src="Video\AfficheLacosteAnimationSMALL.mp4" type="video/mp4">
+          Votre navigateur ne supporte pas la vidéo.
+        </video>
+      </div>
   <div id="blur">
 
     <nav class="blur-nav">
       <button id="vitrine2" class="vitrine">Retour</button>
     </nav>
-
     <div id="blur-content">
-      <img id="ImageDemain" src="JPGPNG\AFFICHE-1-A3-LACOSTE-300-DPI-RVBSMALL.jpg">
-
+      <img class="ImageDemain first-image" id="thumbnail" src="JPGPNG\AFFICHE-1-A3-LACOSTE-300-DPI-RVBSMALL.jpg">
+      
       <div class="text-block">
         <h2><strong>Affiche Lacoste - Projet Universitaire</strong></h2>
         <p>Dans le cadre d’un projet pluridisciplinaire mêlant création graphique, photographie et motion design,
@@ -335,7 +624,7 @@
     </div>
 
     <div id="blur-content">
-      <img id="ImageDemain" src="JPGPNG/IMAGINONS_DEMAIN-AFFICHE-2.1.jpg">
+      <img class="ImageDemain" src="JPGPNG/IMAGINONS_DEMAIN-AFFICHE-2.1.jpg">
 
       <div class="text-block">
         <h2><strong>Imaginons Demain - Mission de stage</strong></h2>
@@ -364,10 +653,10 @@
     </div>
 
     <div id="blur-content">
-      <img id="ImageDemain" src="JPGPNG\VILLONS_BULLETIN-586.jpg">
+      <img class="ImageDemain" src="JPGPNG\VILLONS_BULLETIN-586.jpg">
       
       <div class="text-block">
-        <h2><strong>Bulletin Municipale - Mission de stage</strong></h2>
+        <h2><strong>Bulletin Municipal - Mission de stage</strong></h2>
         <p>
         Dans le cadre de mon stage, j’ai participé à la mise en page du bulletin municipal de Villons-les-Buissons (Calvados, Normandie).<br>
         Le projet consistait à créer une nouvelle édition du bulletin à partir d’un cahier des charges précis, de texte fournis,
@@ -379,8 +668,10 @@
         Ce projet a renforcé mes compétences en mise en page et d’approfondir l’utilisation d’InDesign. 
         J’y ai acquis méthode, rigueur et efficacité.
         </p>
+        <div id="key" title="Récupérer la clé">🔑</div>
         <h3><strong>Outil Utilisé</strong></h3>
         <img id="Outils" src="SVG\adobe-indesign-cc-icon.svg">
+        
       </div>
       
     </div>
