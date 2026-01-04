@@ -425,22 +425,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
       { once: true }
     );
   });
-
-  document.querySelectorAll(".buttonENTER").forEach(buttonENTER => {
-  buttonENTER.addEventListener("click", () => {
-    const href = button.dataset.href;
-    document.body.classList.add("fade-out");
-
-    document.body.addEventListener(
-      "transitionend",
-      () => {
-        window.location.href = href;
-      },
-      { once: true }
-    );
-  });
-});
-
 });
 
   var html = document.getElementById("html");
@@ -501,21 +485,24 @@ document.addEventListener("DOMContentLoaded", (event) => {
   }
 
 openDoorBtn.addEventListener("click", (e) => {
-  e.preventDefault(); // <-- empêche le navigateur de suivre le href immédiatement
+  e.preventDefault();
 
   const hasKey = sessionStorage.getItem("hasKey");
 
   if (hasKey === "true") {
-    // Message vert et ouverture de la porte
     doorMessage.style.color = "green";
     doorMessage.textContent = "";
 
-    // Redirection vers la pièce suivante
-    setTimeout(() => {
-      window.location.href = "SiteJPGChaudron.html";
-    }, 500); // laisse le message 0.5s
+    document.body.classList.add("fade-out");
+
+    document.body.addEventListener(
+      "transitionend",
+      () => {
+        window.location.href = "SiteJPGChaudron.html";
+      },
+      { once: true }
+    );
   } else {
-    // Message rouge, tu n’as pas la clé
     doorMessage.style.color = "#c0392b";
     doorMessage.textContent = "Je n'ai pas la clé, aidez-moi à la trouver !";
   }
